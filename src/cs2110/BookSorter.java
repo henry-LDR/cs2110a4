@@ -68,20 +68,21 @@ public class BookSorter {
      * @param start      - starting index of selection, inclusive. must be a valid index in books
      * @param firstSoFar - index representing a prediction of which element belongs in the first
      *                   position
-     * @param ordering
+     * @param ordering   - determines which ordering scheme to use. if ordering is 1, then sort by
+     *                   title. if ordering is 2, then sort by author
      * @return an int representing the index of the element in the array books that belongs in the
      * first position
      * @precondition - start, firstSoFar are valid indices in books
      */
     private static int selectFirst(Book[] books, int start, int firstSoFar, int ordering) {
-        assert start >=0 && start <=books.length;
-        assert firstSoFar >=0 && firstSoFar <books.length;
-        assert ordering ==1 || ordering == 2;
+        assert start >= 0 && start <= books.length;
+        assert firstSoFar >= 0 && firstSoFar < books.length;
+        assert ordering == 1 || ordering == 2;
 
-        if (start >= books.length){
+        if (start >= books.length) {
             return firstSoFar;
         }
-        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title())>0){
+        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title()) > 0) {
             firstSoFar = start;
         }
         return selectFirst(books, start + 1, firstSoFar, ordering);
