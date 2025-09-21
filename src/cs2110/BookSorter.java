@@ -74,8 +74,17 @@ public class BookSorter {
      * @precondition - start, firstSoFar are valid indices in books
      */
     private static int selectFirst(Book[] books, int start, int firstSoFar, int ordering) {
-        // TODO: implement me!
-        return 0;
+        assert start >=0 && start <=books.length;
+        assert firstSoFar >=0 && firstSoFar <books.length;
+        assert ordering ==1 || ordering == 2;
+
+        if (start >= books.length){
+            return firstSoFar;
+        }
+        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title())>0){
+            firstSoFar = start;
+        }
+        return selectFirst(books, start + 1, firstSoFar, ordering);
     }
 
     /**
