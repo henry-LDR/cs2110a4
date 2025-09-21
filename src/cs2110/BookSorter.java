@@ -82,7 +82,7 @@ public class BookSorter {
         if (start >= books.length) {
             return firstSoFar;
         }
-        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title()) > 0) {
+        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title()) < 0) {
             firstSoFar = start;
         }
         return selectFirst(books, start + 1, firstSoFar, ordering);
@@ -127,7 +127,7 @@ public class BookSorter {
 
     public static void main(String[] args) {
         // Edit this filename to use a different data set
-        String filename = "data/books.csv";
+          String filename = "data/books.csv";
 
         Book[] books = parseBookList(filename);
         System.out.println("=== Before Sorting ===");
