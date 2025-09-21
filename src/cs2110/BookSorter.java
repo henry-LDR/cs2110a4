@@ -61,7 +61,18 @@ public class BookSorter {
     }
 
     /**
-     * TODO: Document me!
+     * Based on a starting index (inclusive), selects the index of the element of the array books
+     * that should be first
+     *
+     * @param books      - array of book objects
+     * @param start      - starting index of selection, inclusive. must be a valid index in books
+     * @param firstSoFar - index representing a prediction of which element belongs in the first
+     *                   position
+     * @param ordering   - determines which ordering scheme to use. if ordering is 1, then sort by
+     *                   title. if ordering is 2, then sort by author
+     * @return an int representing the index of the element in the array books that belongs in the
+     * first position
+     * @precondition - start, firstSoFar are valid indices in books
      */
     private static int selectFirst(Book[] books, int start, int firstSoFar, int ordering) {
         assert start >= 0 && start <= books.length;
