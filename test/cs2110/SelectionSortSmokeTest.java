@@ -103,4 +103,96 @@ public class SelectionSortSmokeTest {
 
     }
 
+    @Test
+    @DisplayName("Test empty array")
+    void testEmptyArray() {
+        Book[] books = new Book[] {};
+        Book[] expected = new Book[] {};
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Sorting an empty array should do nothing");
+    }
+
+    @Test
+    @DisplayName("Test single element array")
+    void testSingleElement() {
+        Book[] books = new Book[] { new Book("Alpha", "Author A") };
+        Book[] expected = new Book[] { new Book("Alpha", "Author A") };
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Sorting a single element should not change the array");
+    }
+
+    @Test
+    @DisplayName("Test already sorted array")
+    void testAlreadySorted() {
+        Book[] books = new Book[] {
+                new Book("Aardvark", "Author X"),
+                new Book("Bravo", "Author Y"),
+                new Book("Charlie", "Author Z")
+        };
+        Book[] expected = new Book[] {
+                new Book("Aardvark", "Author X"),
+                new Book("Bravo", "Author Y"),
+                new Book("Charlie", "Author Z")
+        };
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Array already sorted by title should remain unchanged");
+    }
+
+    @Test
+    @DisplayName("Test reverse sorted array")
+    void testReverseSorted() {
+        Book[] books = new Book[] {
+                new Book("Charlie", "Author Z"),
+                new Book("Bravo", "Author Y"),
+                new Book("Aardvark", "Author X")
+        };
+        Book[] expected = new Book[] {
+                new Book("Aardvark", "Author X"),
+                new Book("Bravo", "Author Y"),
+                new Book("Charlie", "Author Z")
+        };
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Array reverse sorted by title should be sorted ascending");
+    }
+
+    @Test
+    @DisplayName("Test array with mixed case titles")
+    void testMixedCaseTitles() {
+        Book[] books = new Book[] {
+                new Book("alpha", "Author A"),
+                new Book("Bravo", "Author B"),
+                new Book("charlie", "Author C"),
+                new Book("Alpha", "Author D")
+        };
+        Book[] expected = new Book[] {
+                new Book("alpha", "Author A"),
+                new Book("Alpha", "Author D"),
+                new Book("Bravo", "Author B"),
+                new Book("charlie", "Author C")
+        };
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Sorting should ignore case but preserve order for equal titles ignoring case");
+    }
+
+    @Test
+    @DisplayName("Test large random array")
+    void testLargeRandomArray() {
+        Book[] books = new Book[] {
+                new Book("Delta", "Author 1"),
+                new Book("Charlie", "Author 2"),
+                new Book("Echo", "Author 3"),
+                new Book("Alpha", "Author 4"),
+                new Book("Bravo", "Author 5")
+        };
+        Book[] expected = new Book[] {
+                new Book("Alpha", "Author 4"),
+                new Book("Bravo", "Author 5"),
+                new Book("Charlie", "Author 2"),
+                new Book("Delta", "Author 1"),
+                new Book("Echo", "Author 3")
+        };
+        BookSorter.selectionSort(books, 1);
+        assertArrayEquals(expected, books, "Large random array should be sorted ascending by title");
+    }
+
 }
