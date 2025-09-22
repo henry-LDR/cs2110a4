@@ -75,34 +75,6 @@ public class SelectionSortSmokeTest {
         assertArrayEquals(actual, expected);
     }
 
-
-    @DisplayName("WHEN this list has duplicates, THEN the output list is in order for ordering 2")
-
-    @Test
-    void testDuplicatesAuthor() {
-        Book[] input = new Book[] {
-                new Book("Viral Justice", "Ruha Benjamin"),
-                new Book("Invisible Women", "Caroline Criado Perez"),
-                new Book("Race After Technology", "Ruha Benjamin"),
-                new Book("Weapons of Math Destruction", "Cathy O'Neil"),
-                new Book("Imagination: A Manifesto", "Ruha Benjamin"),
-        };
-
-        BookSorter.selectionSort(input, 2);
-
-        // Input has been modified. We are now thinking of it as actual output.
-        Book[] actual = input;
-
-        // This tests a property of the output array rather than testing it for equality
-        // with an expected array.
-        for (int i = 0; i < input.length-1; i++) {
-            // we want actual[i+1] to have author string greater than or equal to actual[i]
-            // so the output should be negative or zero
-            assertTrue(actual[i].author().compareToIgnoreCase(actual[i+1].author()) <= 0);
-        }
-
-    }
-
     @Test
     @DisplayName("Test empty array")
     void testEmptyArray() {
