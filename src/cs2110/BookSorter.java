@@ -82,7 +82,7 @@ public class BookSorter {
         if (start >= books.length) {
             return firstSoFar;
         }
-        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title()) > 0) {
+        if (books[start].title().compareToIgnoreCase(books[firstSoFar].title()) < 0) {
             firstSoFar = start;
         }
         return selectFirst(books, start + 1, firstSoFar, ordering);
@@ -91,13 +91,43 @@ public class BookSorter {
     /**
      * TODO: Document me!
      */
-    public static void selectionSort(Book[] books, int ordering) {
+    public static void selectionSortRecursive(Book[] books, int ordering, int start) {
         // TODO: Implement me!
+        assert ordering == 1 || ordering == 2;
+        assert start <=books.length && start>=0;
+
+        if (start>=books.length){
+            return;
+        }
+        int firstBook = selectFirst(books, start, start, ordering);
+        swap(books, start, firstBook);
+        selectionSortRecursive(books, ordering, start + 1);
+
+    }
+
+    /**
+     * TODO: Document me!
+     */
+    public static void swap(Book[] books, int first, int second) {
+        assert first < books.length;
+        assert second < books.length;
+
+        Book temp = books[first];
+        books[first] = books[second];
+        books[second] = temp;
+    }
+
+    /**
+     * TODO: Document me!
+     */
+    public static void selectionSort(Book[] books, int ordering) {
+        assert ordering == 1 || ordering == 2;
+        selectionSortRecursive(books, ordering, 0);
     }
 
     public static void main(String[] args) {
         // Edit this filename to use a different data set
-        String filename = "data/books.csv";
+          String filename = "data/books.csv";
 
         Book[] books = parseBookList(filename);
         System.out.println("=== Before Sorting ===");
