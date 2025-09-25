@@ -91,7 +91,6 @@ public class BookSorter {
             firstSoFar = start;
         }
 
-
         return selectFirst(books, start + 1, firstSoFar, ordering);
     }
 
